@@ -2,28 +2,6 @@
 
 Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses mit Ausgesuchten Unterkapiteln aus dem LPI E701 Exam
 
-## Einrichtung forken dieses GitHub Repository für Dokumentation (Kapitel kann in der Kopie gelöscht werden)
-
-Als erster Schritt muss ein GitHub-Account eingerichtet werden. Dieser dient uns später als "Cloud-Speicher" unserer Dokumentation und weiteren Dateien.
-
-Folgende Arbeiten müssen gemacht werden:
-
-**Account erstellen**
-
-1. Auf www.github.com ein Benutzerkonto erstellen (Angabe von Username, E-Mail und Passwort)
-2. E-Mail zur Verifizierung des Kontos bestätigen und anschliessend auf GitHub anmelden
-
-**Forken dieses Repositories**
-
-1. Auf Repository [myE701](https://github.com/w901-fr19-mi/myE701) wechseln.
-2. Klicken Sie oben rechts auf der Seite auf `Fork` .
-
-![](https://help.github.com/assets/images/help/repository/fork_button.jpg)
-
-Das ist es! Jetzt haben Sie einen `Fork` (Kopie) des Original myE010 Repository und können dessen Inhalte verändern.
-
-Weitere Möglichkeiten siehe [Modul M300 - 10 Toolumgebung](https://github.com/mc-b/M300/tree/master/10-Toolumgebung)
-
 ## Dokumentation (Kapitel kann in der Kopie gelöscht werden)
 
 Die Dokumentation erfolgt im Markdownformat, dem Standard Wiki Format von github. Dies geht am Einfachsten direkt auf github.com.
@@ -31,49 +9,50 @@ Die Dokumentation erfolgt im Markdownformat, dem Standard Wiki Format von github
 Eine Markdown Übersicht / Syntax etc. finden Sie auf:
 * [Markdown Syntax inkl. Online Demo](http://markdown-syntax.de/Was-ist-Markdown/)
 * [Dokumentation aus dem Modul M300](https://github.com/mc-b/M300/blob/master/80-Ergaenzungen/vcs/03-Markdown.md) 
-<details>
-	<summary>## Installation (Kapitel kann in der Kopie gelöscht werden)</summary>
 
-Hier lohnt es sich Vagrant zu verwenden. Damit kann gleichzeitig eine VM (Ubuntu 16.x) mit Docker und Kubernetes aufgesetzt werden oder mittels des Projektes [lernkube](https://github.com/mc-b/lernkube) ein Kubernetes Master. 
+<details> 
+	## Installation (Kapitel kann in der Kopie gelöscht werden)
 
-**Vagrant (lernkube) Installation**
+	Hier lohnt es sich Vagrant zu verwenden. Damit kann gleichzeitig eine VM (Ubuntu 16.x) mit Docker und Kubernetes aufgesetzt werden oder mittels des Projektes [lernkube](https://github.com/mc-b/lernkube) ein Kubernetes Master. 
 
-Zuerst muss folgende SW Installiert werden:
-* [Git/Bash](https://git-scm.com/downloads)
-* [Vagrant](https://www.vagrantup.com/) 
-* [VirtualBox](https://www.virtualbox.org/)
+	**Vagrant (lernkube) Installation**
 
-Wechseln Sie auf die Kommandozeile (*bash* oder *PowerShell*) und klonen des Projekt `lernkube` und erstellen die VM(s):
+	Zuerst muss folgende SW Installiert werden:
+	* [Git/Bash](https://git-scm.com/downloads)
+	* [Vagrant](https://www.vagrantup.com/) 
+	* [VirtualBox](https://www.virtualbox.org/)
 
-	git clone https://github.com/mc-b/lernkube
-	cd lernkube
-	cp templates/DUK.yaml config.yaml
-	vagrant plugin install vagrant-disksize
-	vagrant up
+	Wechseln Sie auf die Kommandozeile (*bash* oder *PowerShell*) und klonen des Projekt `lernkube` und erstellen die VM(s):
 
-Während der Installation werden im Verzeichnis `lernkube` mehrere `.bat` Dateien und die Client Programme `docker`, `kubectl`, `helm` etc. erzeugt.
+		git clone https://github.com/mc-b/lernkube
+		cd lernkube
+		cp templates/DUK.yaml config.yaml
+		vagrant plugin install vagrant-disksize
+		vagrant up
 
-Die Bezeichnungen deren Funktion kann mittels `kubeps.bat` (*PowerShell*) oder `source kubeenv` (*Bash*) angezeigt werden. Die Scripts setzen gleichzeitig die Umgebungsvariablen, damit vom Notebook Docker und Kubernetes (`kubectl`) an die VM weitergereicht werden können.
+	Während der Installation werden im Verzeichnis `lernkube` mehrere `.bat` Dateien und die Client Programme `docker`, `kubectl`, `helm` etc. erzeugt.
 
-Beispiele:
+	Die Bezeichnungen deren Funktion kann mittels `kubeps.bat` (*PowerShell*) oder `source kubeenv` (*Bash*) angezeigt werden. Die Scripts setzen gleichzeitig die Umgebungsvariablen, damit vom Notebook Docker und Kubernetes (`kubectl`) an die VM weitergereicht werden können.
 
-	docker images # zeigt alle Container Images an
-	kubectl get all # zeigt alle Kubernetes Ressourcen an.
-	
-**Alternative Installationen** 
+	Beispiele:
 
-Alternativ kann [Docker for Windows/Mac](https://www.docker.com/products/docker-desktop) oder [Minikube](https://github.com/kubernetes/minikube) verwendet werden. Diese Umgebungen sind aber nicht Cluster fähig und erfordern [Feintuning](https://github.com/mc-b/lernkube/tree/master/docker4windows/).
+		docker images # zeigt alle Container Images an
+		kubectl get all # zeigt alle Kubernetes Ressourcen an.
 
-Oder die gleiche Umgebung wie mit lernkube auf den Cloud Plattformen von Amazon und Microsoft eingerichtet werden.
+	**Alternative Installationen** 
 
-* [Amazon AWS Cloud](https://github.com/mc-b/lernkube/tree/master/aws/) - hat noch Probleme mit Datenspeicherung und LoadBalancer.
-* [Microsoft Azure Cloud](https://github.com/mc-b/lernkube/tree/master/azure/)	 
+	Alternativ kann [Docker for Windows/Mac](https://www.docker.com/products/docker-desktop) oder [Minikube](https://github.com/kubernetes/minikube) verwendet werden. Diese Umgebungen sind aber nicht Cluster fähig und erfordern [Feintuning](https://github.com/mc-b/lernkube/tree/master/docker4windows/).
 
-**Weitere nützliche Programme**
+	Oder die gleiche Umgebung wie mit lernkube auf den Cloud Plattformen von Amazon und Microsoft eingerichtet werden.
 
-* [Windows SSH Client, putty](https://putty.org)
-* [Grafischer Windows SFTP Client, Bitvise SSH Client](https://www.bitvise.com/ssh-client-download)
-* [Visual Studio Code](https://code.visualstudio.com/)
+	* [Amazon AWS Cloud](https://github.com/mc-b/lernkube/tree/master/aws/) - hat noch Probleme mit Datenspeicherung und LoadBalancer.
+	* [Microsoft Azure Cloud](https://github.com/mc-b/lernkube/tree/master/azure/)	 
+
+	**Weitere nützliche Programme**
+
+	* [Windows SSH Client, putty](https://putty.org)
+	* [Grafischer Windows SFTP Client, Bitvise SSH Client](https://www.bitvise.com/ssh-client-download)
+	* [Visual Studio Code](https://code.visualstudio.com/)
 </details>
 
 ## Fahrplan
