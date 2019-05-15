@@ -66,7 +66,7 @@ Oder die gleiche Umgebung wie mit lernkube auf den Cloud Plattformen von Amazon 
 
 | Datum | behandelte Unterrichtsinhalte: | Gewichtung |
 | -------- | ------ | -------- |
-| 15.05.19 | Installation SW, Einrichten Linux VM<br>1.1 Linux Evolution and Popular Operating Systems<br>1.3 Open Source Software and Licensing | 2 + 2 |
+| 15.05.19 | Linux Evolution and Popular Operating Systems | 2 |
 | 15.05.19 | Installation SW, Einrichten Linux VM(s)<br>[701.1 Modern Software Development, 1. Teil](https://github.com/w901-fr19-mi/E701#7011-modern-software-development) | 6 |
 | 22.05.19 | [701.1 Modern Software Development, 2. Teil](https://github.com/w901-fr19-mi/E701#7011-modern-software-development) | 4 |
 | 29.05.19 | [701.3 Source Code Management](https://github.com/w901-fr19-mi/E701#7013-source-code-management) | 5 | 
@@ -81,6 +81,34 @@ Kapitel aus E701 wurden in der Gruppe mit .... erarbeitet. Davon sind mindestens
 
 ## Dokumention des Lern- und Entwicklungsprozesses
 ***
+### Kapitel 1: Linux Basics recap (Status: In Arbeit)
+[Linux Evolution and popular operating Systems](https://github.com/w901-fr19-mi/E010#11-linux-evolution-and-popular-operating-systems)
+
+**Weight**: 2
+
+**Beschreibung** Linux Überblick: Was ist Linux, was für Distro gibt es, was sind die Unterschiede, wie ist es Aufgebaut?
+
+**Tagesziele** Überblick über das Modul erhalten, [Linux Essentials](https://www.tuxcademy.org/download/de/lxes/lxes-de-manual.pdf) überfliegen und interessante Passagen recherchieren/lösen & sowie gestellte Fragen beantworten
+
+**Beispiele und Arbeitsergebnisse**
+#### Beef zwischen Torvaldis & Tannenbaum
+Zu einer Zeit in der Computer schon Fuss gefasst hatten aber es immernoch ständig Änderungen gab beeften sich der Gründer von Linux (Linus Torvaldis) und der Gründer der Distibution Minix (Andrew S. Tanenbaum) öffentlich darüber stritten welche Architektur (Monolithischer Kernel oder Microkernel) besser ist.
+
+Da heute keiner Minix kennt und Linux das grösste Betriebsystem ist, ist die Antwort naheliegend.
+
+*[Monolithischer Kernel](https://stackoverflow.com/questions/1806585/why-is-linux-called-a-monolithic-kernel)*
+
+A monolithic kernel is a kernel where all services (file system, VFS, device drivers, etc) as well as core functionality (scheduling, memory allocation, etc.) are a tight knit group sharing the same space. This directly opposes a microkernel.
+
+A microkernel prefers an approach where core functionality is isolated from system services and device drivers (which are basically just system services). For instance, VFS (virtual file system) and block device file systems (i.e. minixfs) are separate processes that run outside of the kernel's space, using IPC to communicate with the kernel, other services and user processes. In short, if it's a module in Linux, it's a service in a microkernel, indicating an isolated process.
+
+Do not confuse the term modular kernel to be anything but monolithic. Some monolithic kernels can be compiled to be modular (e.g Linux), what matters is that the module is inserted to and runs from the same space that handles core functionality (kernel space).
+
+The advantage to a microkernel is that any failed service can be easily restarted, for instance, there is no kernel halt if the root file system throws an abort. This can also be seen as a disadvantage, though, because it can hide pretty critical bugs (or make them seem not-so-critical, because the problem seems to continuously fix itself). It's seen as a big advantage in scenarios where you simply can't conveniently fix something once it has been deployed.
+
+The disadvantage to a microkernel is that asynchronous IPC messaging can become very difficult to debug, especially if fibrils are implemented. Additionally, just tracking down a FS/write issue means examining the user space process, the block device service, VFS service, file system service and (possibly) the PCI service. If you get a blank on that, its time to look at the IPC service. This is often easier in a monolithic kernel. GNU Hurd suffers from these debugging problems (reference). I'm not even going to go into checkpointing when dealing with complex message queues. Microkernels are not for the faint of heart.
+
+The shortest path to a working, stable kernel is the monolithic approach. Either approach can offer a POSIX interface, where the design of the kernel becomes of little interest to someone simply wanting to write code to run on any given design.
 
 ### Kapitel: 702.1 Container Usage (Status: In Arbeit)
 
