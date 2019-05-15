@@ -2,7 +2,10 @@
 
 Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses mit Ausgesuchten Unterkapiteln aus dem LPI E701 Exam
 
-<details> <summary> How To: Dokumentation, Install etc. </summary>
+<details> 
+<summary> 
+	
+### How To: Dokumentation, Install etc. </summary>
 	
 ## Dokumentation (Kapitel kann in der Kopie gelöscht werden)
 
