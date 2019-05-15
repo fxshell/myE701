@@ -2,6 +2,7 @@
 
 Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses mit Ausgesuchten Unterkapiteln aus dem LPI E701 Exam
 
+<details> 
 ## Dokumentation (Kapitel kann in der Kopie gelöscht werden)
 
 Die Dokumentation erfolgt im Markdownformat, dem Standard Wiki Format von github. Dies geht am Einfachsten direkt auf github.com.
@@ -10,7 +11,7 @@ Eine Markdown Übersicht / Syntax etc. finden Sie auf:
 * [Markdown Syntax inkl. Online Demo](http://markdown-syntax.de/Was-ist-Markdown/)
 * [Dokumentation aus dem Modul M300](https://github.com/mc-b/M300/blob/master/80-Ergaenzungen/vcs/03-Markdown.md) 
 
-<details> 
+
 	## Installation (Kapitel kann in der Kopie gelöscht werden)
 
 	Hier lohnt es sich Vagrant zu verwenden. Damit kann gleichzeitig eine VM (Ubuntu 16.x) mit Docker und Kubernetes aufgesetzt werden oder mittels des Projektes [lernkube](https://github.com/mc-b/lernkube) ein Kubernetes Master. 
