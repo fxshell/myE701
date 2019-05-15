@@ -31,7 +31,8 @@ Die Dokumentation erfolgt im Markdownformat, dem Standard Wiki Format von github
 Eine Markdown Übersicht / Syntax etc. finden Sie auf:
 * [Markdown Syntax inkl. Online Demo](http://markdown-syntax.de/Was-ist-Markdown/)
 * [Dokumentation aus dem Modul M300](https://github.com/mc-b/M300/blob/master/80-Ergaenzungen/vcs/03-Markdown.md) 
-<details><summary## Installation (Kapitel kann in der Kopie gelöscht werden)</summary>
+<details>
+	<summary>## Installation (Kapitel kann in der Kopie gelöscht werden)</summary>
 
 Hier lohnt es sich Vagrant zu verwenden. Damit kann gleichzeitig eine VM (Ubuntu 16.x) mit Docker und Kubernetes aufgesetzt werden oder mittels des Projektes [lernkube](https://github.com/mc-b/lernkube) ein Kubernetes Master. 
 
