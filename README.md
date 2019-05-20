@@ -2,9 +2,9 @@
 
 Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses mit Ausgesuchten Unterkapiteln aus dem LPI E701 Exam
 # Important Links
-
-* [DevOps forked instructions] (https://github.com/fxshell/E701---DevOps)
-* [W901 BSCW] (https://bscw.tbz.ch/bscw/bscw.cgi/26211645)
+* [Module Overview](https://github.com/w901-fr19-mi/W901)
+* [DevOps forked instructions](https://github.com/fxshell/E701---DevOps)
+* [W901 BSCW](https://bscw.tbz.ch/bscw/bscw.cgi/26211645)
 * [docker-compose explained](https://www.youtube.com/watch?v=HUpIoF_conA)
 
 <details> 
