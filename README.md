@@ -5,6 +5,8 @@ Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses
 * [Module Overview](https://github.com/w901-fr19-mi/W901)
 * [DevOps forked instructions](https://github.com/fxshell/E701---DevOps)
 * [W901 BSCW](https://bscw.tbz.ch/bscw/bscw.cgi/26211645)
+* [Docker in 12 minutes](https://www.youtube.com/watch?v=YFl2mCHdv24)
+* [Docker compose in 12 minutes](https://www.youtube.com/watch?v=Qw9zlE3t8Ko)
 * [docker-compose explained](https://www.youtube.com/watch?v=HUpIoF_conA)
 
 <details> 
