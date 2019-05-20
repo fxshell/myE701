@@ -1,7 +1,12 @@
 # ![](https://www.lpice.eu/fileadmin/_processed_/csm_LPIC-DevOpsToolsEngineer_43de3c4735.jpg) myE701 - Exam 701: DevOps Tools Engineer 
 
 Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses mit Ausgesuchten Unterkapiteln aus dem LPI E701 Exam
+# Important Links
+
+* [DevOps forked instructions] (https://github.com/fxshell/E701---DevOps)
+* [W901 BSCW] (https://bscw.tbz.ch/bscw/bscw.cgi/26211645)
 * [docker-compose explained](https://www.youtube.com/watch?v=HUpIoF_conA)
+
 <details> 
 <summary> 
 	
