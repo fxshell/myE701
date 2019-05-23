@@ -132,7 +132,7 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 **Tagesziele**, Since I have to read and understand each of the services I can not estimate how long I am going to take for each service. I'll try to do all of them.
 
 **Vorgehen**, Read guides about Docker, keep them as link and conclude the most valuable information as markdown sheet.
-***
+
 ### Beispiele und Arbeitsergebnisse
 
 #### Ansible
