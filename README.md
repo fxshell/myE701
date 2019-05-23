@@ -1,7 +1,7 @@
 # ![](https://www.lpice.eu/fileadmin/_processed_/csm_LPIC-DevOpsToolsEngineer_43de3c4735.jpg) myE701 - Exam 701: DevOps Tools Engineer 
 
 Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses mit Ausgesuchten Unterkapiteln aus dem LPI E701 Exam
-# Important Links
+## Important Links
 * [Module Overview](https://github.com/w901-fr19-mi/W901)
 * [DevOps forked instructions](https://github.com/fxshell/E701---DevOps)
 * [W901 BSCW](https://bscw.tbz.ch/bscw/bscw.cgi/26211645)
@@ -86,9 +86,8 @@ Oder die gleiche Umgebung wie mit lernkube auf den Cloud Plattformen von Amazon 
 
 Kapitel aus E701 wurden in der Gruppe mit .... erarbeitet. Davon sind mindestens 14 Punkte selbständig erarbeitet worden. 
 
-## Dokumention des Lern- und Entwicklungsprozesses
-***
-### Kapitel 1: Linux Basics recap (Status: In Arbeit)
+# Dokumention des Lern- und Entwicklungsprozesses
+## Kapitel 1: Linux Basics recap (Status: In Arbeit)
 [Linux Evolution and popular operating Systems](https://github.com/w901-fr19-mi/E010#11-linux-evolution-and-popular-operating-systems)
 
 **Weight**: 2
@@ -97,16 +96,15 @@ Kapitel aus E701 wurden in der Gruppe mit .... erarbeitet. Davon sind mindestens
 
 **Tagesziele** Überblick über das Modul erhalten, [Linux Essentials](https://www.tuxcademy.org/download/de/lxes/lxes-de-manual.pdf) überfliegen und interessante Passagen recherchieren/lösen & sowie gestellte Fragen beantworten
 
-## Beispiele und Arbeitsergebnisse
-### Beef zwischen Torvaldis & Tannenbaum
+### Beispiele und Arbeitsergebnisse
+***
+#### Beef zwischen Torvaldis & Tannenbaum
 Zu einer Zeit in der Computer schon Fuss gefasst hatten aber es immernoch ständig Änderungen gab beeften sich der Gründer von Linux (Linus Torvaldis) und der Gründer der Distibution Minix (Andrew S. Tanenbaum) öffentlich darüber welche Architektur (Monolithischer Kernel oder Microkernel) besser ist.
 
 Da heute keiner Minix kennt und Linux das grösste Betriebsystem ist, ist die Antwort naheliegend.
 
-
-
+#### Monolithic Kernel
 ***
-## Monolithic Kernel
 *This article is an answer from Stackoverflow and only describes monolithic in contect with __operation systems__.*
 
 *[Monolithischer Kernel](https://stackoverflow.com/questions/1806585/why-is-linux-called-a-monolithic-kernel)*
@@ -127,8 +125,25 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 
 **Fazit und Aussicht** Ich habe schon einiges Über den Aufbau des Linux Kernels gelernt. Die Zeit war aber relativ knapp und ich werde Privat noch Zeit investieren müssen um mehr zu verstehen.
 
-### Kapitel: 702.1 Container Usage (Status: In Arbeit)
+## Kapitel: 2 What is all this ?! (Status: In Arbeit)
+***
+**Weight**: Personal value
 
+**Beschreibung** Short explaination of ~~all~~ most services used in combination with Kubernetes.
+
+**Tagesziele**, Since I have to read and understand each of the services I can not estimate how long I am going to take for each service. I'll try to do all of them.
+
+**Vorgehen**, Read guides about Docker, keep them as link and conclude the most valuable information as markdown sheet.
+
+**Beispiele und Arbeitsergebnisse**
+
+Yes.
+
+**Fazit und Aussicht**, z.B. Die Durcharbeitung von ... gab mir ein besseres Verständnis über die Funktionsweise von Containern.
+
+
+### Kapitel: 702.1 Container Usage (Status: In Arbeit)
+***
 **Weight**: 7 (7)
 
 **Beschreibung** Gegenüberstellung welche Linux Technologien für Container verwendet werden.
