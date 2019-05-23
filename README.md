@@ -68,8 +68,6 @@ Oder die gleiche Umgebung wie mit lernkube auf den Cloud Plattformen von Amazon 
 </details>
 
 ## Fahrplan
-***
-
 
 | Datum | behandelte Unterrichtsinhalte: | Gewichtung |
 | -------- | ------ | -------- |
@@ -95,16 +93,16 @@ Kapitel aus E701 wurden in der Gruppe mit .... erarbeitet. Davon sind mindestens
 **Beschreibung** Linux Überblick: Was ist Linux, was für Distro gibt es, was sind die Unterschiede, wie ist es Aufgebaut?
 
 **Tagesziele** Überblick über das Modul erhalten, [Linux Essentials](https://www.tuxcademy.org/download/de/lxes/lxes-de-manual.pdf) überfliegen und interessante Passagen recherchieren/lösen & sowie gestellte Fragen beantworten
-
-### Beispiele und Arbeitsergebnisse
 ***
+### Beispiele und Arbeitsergebnisse
+
 #### Beef zwischen Torvaldis & Tannenbaum
 Zu einer Zeit in der Computer schon Fuss gefasst hatten aber es immernoch ständig Änderungen gab beeften sich der Gründer von Linux (Linus Torvaldis) und der Gründer der Distibution Minix (Andrew S. Tanenbaum) öffentlich darüber welche Architektur (Monolithischer Kernel oder Microkernel) besser ist.
 
 Da heute keiner Minix kennt und Linux das grösste Betriebsystem ist, ist die Antwort naheliegend.
-
-#### Monolithic Kernel
 ***
+#### Monolithic Kernel
+
 *This article is an answer from Stackoverflow and only describes monolithic in contect with __operation systems__.*
 
 *[Monolithischer Kernel](https://stackoverflow.com/questions/1806585/why-is-linux-called-a-monolithic-kernel)*
@@ -120,11 +118,10 @@ The disadvantage to a microkernel is that asynchronous IPC messaging can become 
 
 The shortest path to a working, stable kernel is the monolithic approach. Either approach can offer a POSIX interface, where the design of the kernel becomes of little interest to someone simply wanting to write code to run on any given design.
 ![Monolithischer Kernel](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/OS-structure2.svg/1200px-OS-structure2.svg.png "Monolithischer Kernel")
-***
 
 
 **Fazit und Aussicht** Ich habe schon einiges Über den Aufbau des Linux Kernels gelernt. Die Zeit war aber relativ knapp und ich werde Privat noch Zeit investieren müssen um mehr zu verstehen.
-
+***
 ## Kapitel: 2 What is all this ?! (Status: In Arbeit)
 ***
 **Weight**: Personal value
