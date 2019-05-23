@@ -122,6 +122,7 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 
 **Fazit und Aussicht** Ich habe schon einiges Über den Aufbau des Linux Kernels gelernt. Die Zeit war aber relativ knapp und ich werde Privat noch Zeit investieren müssen um mehr zu verstehen.
 
+***
 ## Kapitel: 2 What is all this ?! (Status: In Arbeit)
 
 **Weight**: Personal value
@@ -131,17 +132,20 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 **Tagesziele**, Since I have to read and understand each of the services I can not estimate how long I am going to take for each service. I'll try to do all of them.
 
 **Vorgehen**, Read guides about Docker, keep them as link and conclude the most valuable information as markdown sheet.
-
+***
 ### Beispiele und Arbeitsergebnisse
 
+#### Ansible
+
+TEXT
+TEXT TEXT
 **Links:** 
 + [Microservices benefits ands challanges](https://www.cio.com/article/3201193/7-reasons-to-switch-to-microservices-and-5-reasons-you-might-not-succeed.html)
 + second one
 
 **Fazit und Aussicht**, z.B. Die Durcharbeitung von ... gab mir ein besseres Verständnis über die Funktionsweise von Containern.
 
-
-### Kapitel: 702.1 Container Usage (Status: In Arbeit)
+## Kapitel: 702.1 Container Usage (Status: In Arbeit)
 
 **Weight**: 7 (7)
 
