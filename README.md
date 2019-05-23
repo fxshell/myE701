@@ -121,9 +121,9 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 
 
 **Fazit und Aussicht** Ich habe schon einiges Über den Aufbau des Linux Kernels gelernt. Die Zeit war aber relativ knapp und ich werde Privat noch Zeit investieren müssen um mehr zu verstehen.
-***
+
 ## Kapitel: 2 What is all this ?! (Status: In Arbeit)
-***
+
 **Weight**: Personal value
 
 **Beschreibung** Short explaination of ~~all~~ most services used in combination with Kubernetes.
@@ -132,15 +132,17 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 
 **Vorgehen**, Read guides about Docker, keep them as link and conclude the most valuable information as markdown sheet.
 
-**Beispiele und Arbeitsergebnisse**
+### Beispiele und Arbeitsergebnisse
 
-Yes.
+**Links:** 
++ [Microservices benefits ands challanges](https://www.cio.com/article/3201193/7-reasons-to-switch-to-microservices-and-5-reasons-you-might-not-succeed.html)
++ second one
 
 **Fazit und Aussicht**, z.B. Die Durcharbeitung von ... gab mir ein besseres Verständnis über die Funktionsweise von Containern.
 
 
 ### Kapitel: 702.1 Container Usage (Status: In Arbeit)
-***
+
 **Weight**: 7 (7)
 
 **Beschreibung** Gegenüberstellung welche Linux Technologien für Container verwendet werden.
@@ -159,7 +161,8 @@ Yes.
 
 **Fazit und Aussicht**, z.B. Die Durcharbeitung von ... gab mir ein besseres Verständnis über die Funktionsweise von Containern.
 
-## Links
+## 
+
 
 * [Exam 701: DevOps Tools Engineer](https://www.lpi.org/our-certifications/exam-701-objectives) 
 * [E701 Dokumentation](https://github.com/w901-fr19-mi/E701)
