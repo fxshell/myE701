@@ -97,17 +97,17 @@ Kapitel aus E701 wurden in der Gruppe mit .... erarbeitet. Davon sind mindestens
 
 **Tagesziele** Überblick über das Modul erhalten, [Linux Essentials](https://www.tuxcademy.org/download/de/lxes/lxes-de-manual.pdf) überfliegen und interessante Passagen recherchieren/lösen & sowie gestellte Fragen beantworten
 
-**Beispiele und Arbeitsergebnisse**
-#### Beef zwischen Torvaldis & Tannenbaum
+## Beispiele und Arbeitsergebnisse
+### Beef zwischen Torvaldis & Tannenbaum
 Zu einer Zeit in der Computer schon Fuss gefasst hatten aber es immernoch ständig Änderungen gab beeften sich der Gründer von Linux (Linus Torvaldis) und der Gründer der Distibution Minix (Andrew S. Tanenbaum) öffentlich darüber welche Architektur (Monolithischer Kernel oder Microkernel) besser ist.
 
 Da heute keiner Minix kennt und Linux das grösste Betriebsystem ist, ist die Antwort naheliegend.
 
-**_Note: Dies bezieht sich nur auf die Architektur von Betriebsystemene. Im bezug auf Cloud Lösungen sind Monolithische herangehensweisen nicht überlegen und Microservices sehr wohl eine Option. Mehr zu dem Thema folgt noch._**
+
 
 ***
 ## Monolithic Kernel
-*This article is an answer from Stackoverflow and only describes monolithic in contect with operation systems.*
+*This article is an answer from Stackoverflow and only describes monolithic in contect with __operation systems__.*
 
 *[Monolithischer Kernel](https://stackoverflow.com/questions/1806585/why-is-linux-called-a-monolithic-kernel)*
 A monolithic kernel is a kernel where all services (file system, VFS, device drivers, etc) as well as core functionality (scheduling, memory allocation, etc.) are a tight knit group sharing the same space. This directly opposes a microkernel.
