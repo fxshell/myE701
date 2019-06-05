@@ -147,6 +147,7 @@ TEXT TEXT
 
 
 ** Common Commands
+
 | Name                                 | Command                                                                |
 |--------------------------------------+------------------------------------------------------------------------|
 | Run curl test temporarily            | =kubectl run --rm mytest --image=yauritux/busybox-curl -it=            |
@@ -176,6 +177,7 @@ TEXT TEXT
 | kubeconfig skip tls verification     | [[https://github.com/dennyzhang/cheatsheet-kubernetes-A4/blob/master/skip-tls-verify.md][skip-tls-verify.md]]                                                     |
 | Reference                            | [[https://github.com/kubernetes/kubernetes/tags][GitHub: kubernetes releases]]                                            |
 | Reference                            | [[https://cheatsheet.dennyzhang.com/cheatsheet-minikube-A4][minikube cheatsheet]], [[https://cheatsheet.dennyzhang.com/cheatsheet-docker-A4][docker cheatsheet]], [[https://cheatsheet.dennyzhang.com/cheatsheet-openshift-A4][OpenShift CheatSheet]]           |
+
 ** Check Performance
 | Name                                         | Command                                              |
 |----------------------------------------------+------------------------------------------------------|
@@ -183,6 +185,7 @@ TEXT TEXT
 | Get pod resource usage                       | =kubectl top pod=                                    |
 | Get resource usage for a given pod           | =kubectl top <podname> --containers=                 |
 | List resource utilization for all containers | =kubectl top pod --all-namespaces --containers=true= |
+
 ** Resources Deletion
 | Name                                    | Command                                                  |
 |-----------------------------------------+----------------------------------------------------------|
