@@ -173,14 +173,11 @@ TEXT TEXT
 | Kubectl apply a folder of yaml files | =kubectl apply -R -f .=                                                |
 | Get services sorted by name          | kubectl get services --sort-by=.metadata.name                          |
 | Get pods sorted by restart count     | kubectl get pods --sort-by='.status.containerStatuses[0].restartCount' |
-| List all container images            | [[https://github.com/dennyzhang/cheatsheet-kubernetes-A4/blob/master/list-all-images.sh#L14-L17][list-all-images.sh]]                                                     |
-| kubeconfig skip tls verification     | [[https://github.com/dennyzhang/cheatsheet-kubernetes-A4/blob/master/skip-tls-verify.md][skip-tls-verify.md]]                                                     |
-| Reference                            | [[https://github.com/kubernetes/kubernetes/tags][GitHub: kubernetes releases]]                                            |
-| Reference                            | [[https://cheatsheet.dennyzhang.com/cheatsheet-minikube-A4][minikube cheatsheet]], [[https://cheatsheet.dennyzhang.com/cheatsheet-docker-A4][docker cheatsheet]], [[https://cheatsheet.dennyzhang.com/cheatsheet-openshift-A4][OpenShift CheatSheet]]           |
+
 
 ** Check Performance
-| Name                                         | Command                                              |
-|----------------------------------------------|------------------------------------------------------|
+| Name | Command|
+|--- |--- |
 | Get node resource usage                      | =kubectl top node=                                   |
 | Get pod resource usage                       | =kubectl top pod=                                    |
 | Get resource usage for a given pod           | =kubectl top <podname> --containers=                 |
