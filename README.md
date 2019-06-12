@@ -175,12 +175,12 @@ TEXT TEXT
 | Get pods sorted by restart count     | kubectl get pods --sort-by='.status.containerStatuses[0].restartCount' |
 
 
-** Check Performance
-| Name | Command|
-|--- |--- |
-| Get node resource usage                      | =kubectl top node=                                   |
-| Get pod resource usage                       | =kubectl top pod=                                    |
-| Get resource usage for a given pod           | =kubectl top <podname> --containers=                 |
+Check Performance
+| Name | Command |
+| --- | --- |
+| Get node resource usage | =kubectl top node= |
+| Get pod resource usage | =kubectl top pod= |
+| Get resource usage for a given pod | =kubectl top <podname> --containers= |
 | List resource utilization for all containers | =kubectl top pod --all-namespaces --containers=true= |
 
 ** Resources Deletion
