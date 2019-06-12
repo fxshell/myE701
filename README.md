@@ -197,7 +197,6 @@ TEXT TEXT
 | Delete resources under a namespace      | =kubectl -n my-ns delete po,svc --all=                   |
 | Delete persist volumes by labels        | =kubectl delete pvc -l app=wordpress=                    |
 | Delete statefulset only (not pods)      | =kubectl delete sts/<stateful_set_name> --cascade=false= |
-#+BEGIN_HTML
 
 ** Log & Conf Files
 | Name                      | Comment                                                                   |
