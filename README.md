@@ -215,6 +215,7 @@ Check Performance
 | log in master node        | =kube-apiserver.log=, =kube-scheduler.log=, =kube-controller-manager.log= |
 | Env                       | =/etc/systemd/system/kubelet.service.d/10-kubeadm.conf=                   |
 | Env                       | export KUBECONFIG=/etc/kubernetes/admin.conf                              |
+
 ** Pod
 
 | Name                         | Command                                                                                   |
@@ -232,7 +233,7 @@ Check Performance
 | Get pod by selector          | kubectl get pods --selector="app=syslog" -o jsonpath='{.items[*].metadata.name}'          |
 | List pods and images         | kubectl get pods -o='custom-columns=PODS:.metadata.name,Images:.spec.containers[*].image' |
 | List pods and containers     | -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name'               |
-| Reference                    | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                                           |
+
 ** Label & Annontation
 	
 | Name                             | Command                                                           |
@@ -241,6 +242,7 @@ Check Performance
 | Manually add label to a pod      | =kubectl label pods dummy-input owner=denny=                      |
 | Remove label                     | =kubectl label pods dummy-input owner-=                           |
 | Manually add annonation to a pod | =kubectl annotate pods dummy-input my-url=https://dennyzhang.com= |
+
 ** Deployment & Scale
 
 | Name                         | Command                                                                  |
@@ -254,9 +256,7 @@ Check Performance
 | Pause/Resume                 | =kubectl rollout pause deployment/nginx-deployment=, =resume=            |
 | Rollback to previous version | =kubectl rollout undo deployment/nginx-deployment=                       |
 | Reference     | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]], [[https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#pausing-and-resuming-a-deployment][Link: Pausing and Resuming a Deployment]] |
-#+BEGIN_HTML
-<a href="https://cheatsheet.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/dennyzhang/cheatsheet.dennyzhang.com/master/images/cheatsheet_dns.png"></a>
-#+END_HTML
+
 ** Quota & Limits & Resource
 
 | Name                          | Command                                                                 |
@@ -285,7 +285,7 @@ Check Performance
 | List secrets                | =kubectl get secrets --all-namespaces=                                |
 | Generate secret             | =echo -n 'mypasswd'=, then redirect to =base64 -decode=               |
 | Create secret from cfg file | kubectl create secret generic db-user-pass --from-file=./username.txt |
-| Reference                   | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]], [[https://kubernetes.io/docs/concepts/configuration/secret/][Link: Secrets]]                        |
+
 ** StatefulSet
 
 | Name                               | Command                                                  |
@@ -293,7 +293,7 @@ Check Performance
 | List statefulset                   | =kubectl get sts=                                        |
 | Delete statefulset only (not pods) | =kubectl delete sts/<stateful_set_name> --cascade=false= |
 | Scale statefulset                  | =kubectl scale sts/<stateful_set_name> --replicas=5=     |
-| Reference           | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                          |
+
 ** Volumes & Volume Claims
 
 | Name                      | Command                                                      |
@@ -310,6 +310,7 @@ Check Performance
 |---------------------------------|------------------------------------------------------------|
 | View all events                 | =kubectl get events --all-namespaces=                      |
 | List Events sorted by timestamp | kubectl get events --sort-by=.metadata.creationTimestamp   |
+
 ** Node Maintenance
 
 | Name                                      | Command                       |
@@ -317,6 +318,7 @@ Check Performance
 | Mark node as unschedulable                | =kubectl cordon $NDOE_NAME=   |
 | Mark node as schedulable                  | =kubectl uncordon $NDOE_NAME= |
 | Drain node in preparation for maintenance | =kubectl drain $NODE_NAME=    |
+
 ** Namespace & Security
 
 | Name                          | Command                                                           |
@@ -338,6 +340,7 @@ Check Performance
 | Add port-forwaring for replicaset | =kubectl port-forward rs/redis-master 6379:6379=         |
 | Add port-forwaring for service    | =kubectl port-forward svc/redis-master 6379:6379=        |
 | Get network policy                | =kubectl get NetworkPolicy=                              |
+
 ** Patch
 
 | Name                          | Summary                                                               |
@@ -356,7 +359,7 @@ Check Performance
 *** Services on Master Nodes
 
 | Name                    | Summary                                                                                                |
-|----------------------------------------------------------------------------------------------------------------------------------|
+|-------------------------|--------------------------------------------------------------------------------------------------------|
 | [[https://github.com/kubernetes/kubernetes/tree/master/cmd/kube-apiserver][kube-apiserver]]          | exposes the Kubernetes API from master nodes                                                           |
 | [[https://coreos.com/etcd/][etcd]]                    | reliable data store for all k8s cluster data                                                           |
 | [[https://github.com/kubernetes/kubernetes/tree/master/cmd/kube-scheduler][kube-scheduler]]          | schedule pods to run on selected nodes                                                                 |
@@ -373,7 +376,7 @@ Check Performance
 *** Addons: pods and services that implement cluster features
 
 | Name                          | Summary                                                                   |
-|-----------------------------------------------------------------------------------------------------------|
+|-------------------------------|---------------------------------------------------------------------------|
 | DNS                           | serves DNS records for Kubernetes services                                |
 | Web UI                        | a general purpose, web-based UI for Kubernetes clusters                   |
 | Container Resource Monitoring | collect, store and serve container metrics                                |
@@ -382,7 +385,7 @@ Check Performance
 *** Tools
 
 | Name                  | Summary                                                     |
-|-------------------------------------------------------------------------------------|
+|----------------------|--------------------------------------------------------------|
 | [[https://github.com/kubernetes/kubernetes/tree/master/cmd/kubectl][kubectl]]               | the command line util to talk to k8s cluster                |
 | [[https://github.com/kubernetes/kubernetes/tree/master/cmd/kubeadm][kubeadm]]               | the command to bootstrap the cluster                        |
 | [[https://kubernetes.io/docs/reference/setup-tools/kubefed/kubefed/][kubefed]]               | the command line to control a Kubernetes Cluster Federation |
