@@ -176,6 +176,7 @@ TEXT TEXT
 
 
 Check Performance
+
 | Name | Command |
 | --- | --- |
 | Get node resource usage | =kubectl top node= |
@@ -184,6 +185,7 @@ Check Performance
 | List resource utilization for all containers | =kubectl top pod --all-namespaces --containers=true= |
 
 ** Resources Deletion
+
 | Name                                    | Command                                                  |
 |-----------------------------------------|----------------------------------------------------------|
 | Delete pod                              | =kubectl delete pod/<pod-name> -n <my-namespace>=        |
@@ -196,6 +198,7 @@ Check Performance
 | Delete statefulset only (not pods)      | =kubectl delete sts/<stateful_set_name> --cascade=false= |
 
 ** Log & Conf Files
+
 | Name                      | Comment                                                                   |
 |---------------------------|---------------------------------------------------------------------------|
 | Config folder             | =/etc/kubernetes/=                                                        |
@@ -213,6 +216,7 @@ Check Performance
 | Env                       | =/etc/systemd/system/kubelet.service.d/10-kubeadm.conf=                   |
 | Env                       | export KUBECONFIG=/etc/kubernetes/admin.conf                              |
 ** Pod
+
 | Name                         | Command                                                                                   |
 |------------------------------|-------------------------------------------------------------------------------------------|
 | List all pods                | =kubectl get pods=                                                                        |
@@ -230,6 +234,7 @@ Check Performance
 | List pods and containers     | -o='custom-columns=PODS:.metadata.name,CONTAINERS:.spec.containers[*].name'               |
 | Reference                    | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                                           |
 ** Label & Annontation
+	
 | Name                             | Command                                                           |
 |----------------------------------|-------------------------------------------------------------------|
 | Filter pods by label             | =kubectl get pods -l owner=denny=                                 |
@@ -237,6 +242,7 @@ Check Performance
 | Remove label                     | =kubectl label pods dummy-input owner-=                           |
 | Manually add annonation to a pod | =kubectl annotate pods dummy-input my-url=https://dennyzhang.com= |
 ** Deployment & Scale
+
 | Name                         | Command                                                                  |
 |------------------------------|--------------------------------------------------------------------------|
 | Scale out                    | =kubectl scale --replicas=3 deployment/nginx-app=                        |
@@ -252,6 +258,7 @@ Check Performance
 <a href="https://cheatsheet.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/dennyzhang/cheatsheet.dennyzhang.com/master/images/cheatsheet_dns.png"></a>
 #+END_HTML
 ** Quota & Limits & Resource
+
 | Name                          | Command                                                                 |
 |-------------------------------|-------------------------------------------------------------------------|
 | List Resource Quota           | =kubectl get resourcequota=                                             |
@@ -260,6 +267,7 @@ Check Performance
 | Customize resource definition | =kubectl set resources deployment nginx -c=nginx --limits=memory=512Mi= |
 | Reference                     | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                         |
 ** Service
+
 | Name                            | Command                                                                           |
 |---------------------------------|-----------------------------------------------------------------------------------|
 | List all services               | =kubectl get services=                                                            |
@@ -271,6 +279,7 @@ Check Performance
 | Expose service as lb service    | =kubectl expose service/wordpress-1-svc --type=LoadBalancer --name=ns1=           |
 | Reference                       | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                                   |
 ** Secrets
+
 | Name                        | Command                                                               |
 |-----------------------------|-----------------------------------------------------------------------|
 | List secrets                | =kubectl get secrets --all-namespaces=                                |
@@ -278,35 +287,40 @@ Check Performance
 | Create secret from cfg file | kubectl create secret generic db-user-pass --from-file=./username.txt |
 | Reference                   | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]], [[https://kubernetes.io/docs/concepts/configuration/secret/][Link: Secrets]]                        |
 ** StatefulSet
+
 | Name                               | Command                                                  |
-|-----------------------------------------------------------------------------------------------|
+|------------------------------------|----------------------------------------------------------|
 | List statefulset                   | =kubectl get sts=                                        |
 | Delete statefulset only (not pods) | =kubectl delete sts/<stateful_set_name> --cascade=false= |
 | Scale statefulset                  | =kubectl scale sts/<stateful_set_name> --replicas=5=     |
 | Reference           | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                          |
 ** Volumes & Volume Claims
+
 | Name                      | Command                                                      |
-|------------------------------------------------------------------------------------------|
+|---------------------------|--------------------------------------------------------------|
 | List storage class        | =kubectl get storageclass=                                   |
 | Check the mounted volumes | =kubectl exec storage ls /data=                              |
 | Check persist volume      | =kubectl describe pv/pv0001=                                 |
 | Copy local file to pod    | =kubectl cp /tmp/my <some-namespace>/<some-pod>:/tmp/server= |
 | Copy pod file to local    | =kubectl cp <some-namespace>/<some-pod>:/tmp/server /tmp/my= |
-| Reference  | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                              |
+
 ** Events & Metrics
+	
 | Name                            | Command                                                    |
-|----------------------------------------------------------------------------------------------|
+|---------------------------------|------------------------------------------------------------|
 | View all events                 | =kubectl get events --all-namespaces=                      |
 | List Events sorted by timestamp | kubectl get events --sort-by=.metadata.creationTimestamp   |
 ** Node Maintenance
+
 | Name                                      | Command                       |
-|---------------------------------------------------------------------------|
+|-------------------------------------------|-------------------------------|
 | Mark node as unschedulable                | =kubectl cordon $NDOE_NAME=   |
 | Mark node as schedulable                  | =kubectl uncordon $NDOE_NAME= |
 | Drain node in preparation for maintenance | =kubectl drain $NODE_NAME=    |
 ** Namespace & Security
+
 | Name                          | Command                                                           |
-|---------------------------------------------------------------------------------------------------|
+|-------------------------------|-------------------------------------------------------------------|
 | List authenticated contexts   | =kubectl config get-contexts=, =~/.kube/config=                   |
 | Set namespace preference      | =kubectl config set-context <context_name> --namespace=<ns_name>= |
 | Load context from config file | =kubectl get cs --kubeconfig kube_config.yml=                     |
@@ -314,38 +328,42 @@ Check Performance
 | Delete the specified context  | =kubectl config delete-context <cluster-name>=                    |
 | List all namespaces defined   | =kubectl get namespaces=                                          |
 | List certificates             | =kubectl get csr=                                                 |
-| Reference                     | [[https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates][Link: kubernetes yaml templates]]                                   |
+
 ** Network
+	
 | Name                              | Command                                                  |
-|----------------------------------------------------------------------------------------------|
+|-----------------------------------|----------------------------------------------------------|
 | Temporarily add a port-forwarding | =kubectl port-forward redis-izl09 6379=                  |
 | Add port-forwaring for deployment | =kubectl port-forward deployment/redis-master 6379:6379= |
 | Add port-forwaring for replicaset | =kubectl port-forward rs/redis-master 6379:6379=         |
 | Add port-forwaring for service    | =kubectl port-forward svc/redis-master 6379:6379=        |
 | Get network policy                | =kubectl get NetworkPolicy=                              |
 ** Patch
+
 | Name                          | Summary                                                               |
-|-------------------------------------------------------------------------------------------------------|
+|-------------------------------|-----------------------------------------------------------------------|
 | Patch service to loadbalancer | =kubectl patch svc $svc_name -p '{"spec": {"type": "LoadBalancer"}}'= |
 ** Extenstions
+
 | Name                         | Summary                    |
-|-----------------------------------------------------------|
+|------------------------------|----------------------------|
 | List api group               | =kubectl api-versions=     |
 | List all CRD                 | =kubectl get crd=          |
 | List storageclass            | =kubectl get storageclass= |
 | List all supported resources | =kubectl api-resources=    |
-#+BEGIN_HTML
-<a href="https://cheatsheet.dennyzhang.com"><img align="right" width="185" height="37" src="https://raw.githubusercontent.com/dennyzhang/cheatsheet.dennyzhang.com/master/images/cheatsheet_dns.png"></a>
-#+END_HTML
+
 ** Components & Services
 *** Services on Master Nodes
+
 | Name                    | Summary                                                                                                |
 |----------------------------------------------------------------------------------------------------------------------------------|
 | [[https://github.com/kubernetes/kubernetes/tree/master/cmd/kube-apiserver][kube-apiserver]]          | exposes the Kubernetes API from master nodes                                                           |
 | [[https://coreos.com/etcd/][etcd]]                    | reliable data store for all k8s cluster data                                                           |
 | [[https://github.com/kubernetes/kubernetes/tree/master/cmd/kube-scheduler][kube-scheduler]]          | schedule pods to run on selected nodes                                                                 |
 | [[https://github.com/kubernetes/kubernetes/tree/master/cmd/kube-controller-manager][kube-controller-manager]] | node controller, replication controller, endpoints controller, and service account & token controllers |
+
 *** Services on Worker Nodes
+
 | Name              | Summary                                                                                   |
 |---------------------------------------------------------------------------------------------------------------|
 | [[https://github.com/kubernetes/kubernetes/tree/master/cmd/kubelet][kubelet]]           | makes sure that containers are running in a pod                                           |
@@ -353,6 +371,7 @@ Check Performance
 | [[https://github.com/docker/engine][Container Runtime]] | Kubernetes supported runtimes: Docker, rkt, runc and any [[https://github.com/opencontainers/runtime-spec][OCI runtime-spec]] implementation. |
 
 *** Addons: pods and services that implement cluster features
+
 | Name                          | Summary                                                                   |
 |-----------------------------------------------------------------------------------------------------------|
 | DNS                           | serves DNS records for Kubernetes services                                |
@@ -361,6 +380,7 @@ Check Performance
 | Cluster-level Logging         | save container logs to a central log store with search/browsing interface |
 
 *** Tools
+
 | Name                  | Summary                                                     |
 |-------------------------------------------------------------------------------------|
 | [[https://github.com/kubernetes/kubernetes/tree/master/cmd/kubectl][kubectl]]               | the command line util to talk to k8s cluster                |
