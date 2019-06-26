@@ -295,6 +295,7 @@ Der Reiz der APIs ist zweifach für die meisten Unternehmen, da APIs oft das Med
 
 <details>
 <summary> Kapitel: 3 What is all this ?! </summary>
+
 ## Kapitel: 3 What is all this ?!
 
 **Weight**: Personal value
@@ -341,6 +342,8 @@ More about [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-overvie
 
 </details>
 
+<details>
+<summary> Common Commands </summary>
 
 **Common Commands
 
@@ -589,6 +592,7 @@ Check Performance
 | Kubernetes Components | [[https://kubernetes.io/docs/concepts/overview/components/][Link: Kubernetes Components]]                                 |
 
 **Fazit und Aussicht**, z.B. Die Durcharbeitung von ... gab mir ein besseres Verständnis über die Funktionsweise von Containern.
+</details>
 
 ## Kapitel: 702.1 Container Usage (Status: In Arbeit)
 
