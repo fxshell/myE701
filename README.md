@@ -66,7 +66,8 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 
 
 **Fazit und Aussicht** Ich habe schon einiges Über den Aufbau des Linux Kernels gelernt. Die Zeit war aber relativ knapp und ich werde Privat noch Zeit investieren müssen um mehr zu verstehen.
-</details>
+
+<summary> Kapitel: 701.1 Modern Software Development </summary>
 
 # Kapitel: 701.1 Modern Software Development (Status: Abgeschlossen)
 
