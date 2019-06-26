@@ -28,8 +28,10 @@ Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses
 
 # Dokumention des Lern- und Entwicklungsprozesses
 <details>
-<summary> Kapitel 1: Linux Basics recap (Status: In Arbeit)
-[Linux Evolution and popular operating Systems](https://github.com/w901-fr19-mi/E010#11-linux-evolution-and-popular-operating-systems) </summary>
+<summary> Kapitel 1 </summary>
+
+Linux Basics recap (Status: In Arbeit)
+[Linux Evolution and popular operating Systems](https://github.com/w901-fr19-mi/E010#11-linux-evolution-and-popular-operating-systems) 
 
 **Weight**: 2
 
