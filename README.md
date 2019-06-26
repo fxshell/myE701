@@ -9,8 +9,7 @@ Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses
 * [Docker compose in 12 minutes](https://www.youtube.com/watch?v=Qw9zlE3t8Ko)
 * [docker-compose explained](https://www.youtube.com/watch?v=HUpIoF_conA)
 
-<details>
-<summary> Fahrplan </summary>
+## Fahrplan
 
 | Datum | behandelte Unterrichtsinhalte: | Gewichtung |
 | -------- | ------ | -------- |
