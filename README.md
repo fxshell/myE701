@@ -1,4 +1,4 @@
-# ![](https://www.lpice.eu/fileadmin/_processed_/csm_LPIC-DevOpsToolsEngineer_43de3c4735.jpg) myE701 - Exam 701: DevOps Tools Engineer 
+#myE701 - Exam 701: DevOps Tools Engineer 
 
 Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses mit Ausgesuchten Unterkapiteln aus dem LPI E701 Exam
 ## Important Links
@@ -65,7 +65,7 @@ Oder die gleiche Umgebung wie mit lernkube auf den Cloud Plattformen von Amazon 
 * [Visual Studio Code](https://code.visualstudio.com/)
 </details>
 <details>
-##  <summary> Fahrplan </summary>
+<summary> Fahrplan </summary>
 
 | Datum | behandelte Unterrichtsinhalte: | Gewichtung |
 | -------- | ------ | -------- |
