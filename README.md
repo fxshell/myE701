@@ -70,7 +70,7 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 <details>
 <summary> Kapitel: 701.1 Modern Software Development </summary>
 
-# Kapitel: 701.1 Modern Software Development (Status: Abgeschlossen)
+# Kapitel: 701.1 Modern Software Development
 
 **Weight**: 6 + 4 Bonsupunkte für die Erstellung eines Microservices inkl Unit-Tests.
 
@@ -293,8 +293,9 @@ Der Reiz der APIs ist zweifach für die meisten Unternehmen, da APIs oft das Med
 
 </details>
 
-***
-## Kapitel: 2 What is all this ?! (Status: In Arbeit)
+<details>
+<summary> Kapitel: 3 What is all this ?! </summary>
+## Kapitel: 3 What is all this ?!
 
 **Weight**: Personal value
 
@@ -338,7 +339,7 @@ More about [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-overvie
 + [Microservices benefits ands challanges](https://www.cio.com/article/3201193/7-reasons-to-switch-to-microservices-and-5-reasons-you-might-not-succeed.html)
 + second one
 
-
+</details>
 
 
 **Common Commands
