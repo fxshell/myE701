@@ -10,9 +10,7 @@ Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses
 * [docker-compose explained](https://www.youtube.com/watch?v=HUpIoF_conA)
 
 <details> 
-<summary> 
-	
-### How To: Dokumentation, Install etc. </summary>
+<summary> How To: Dokumentation, Install etc. </summary>
 	
 ## Dokumentation (Kapitel kann in der Kopie gelöscht werden)
 
