@@ -64,8 +64,8 @@ Oder die gleiche Umgebung wie mit lernkube auf den Cloud Plattformen von Amazon 
 * [Grafischer Windows SFTP Client, Bitvise SSH Client](https://www.bitvise.com/ssh-client-download)
 * [Visual Studio Code](https://code.visualstudio.com/)
 </details>
-
-## Fahrplan
+<details>
+##  <summary> Fahrplan </summary>
 
 | Datum | behandelte Unterrichtsinhalte: | Gewichtung |
 | -------- | ------ | -------- |
@@ -81,7 +81,7 @@ Oder die gleiche Umgebung wie mit lernkube auf den Cloud Plattformen von Amazon 
 |          | Total Punkte | 27 (34) !
 
 Kapitel aus E701 wurden in der Gruppe mit .... erarbeitet. Davon sind mindestens 14 Punkte selbständig erarbeitet worden. 
-
+</details>
 # Dokumention des Lern- und Entwicklungsprozesses
 ## Kapitel 1: Linux Basics recap (Status: In Arbeit)
 [Linux Evolution and popular operating Systems](https://github.com/w901-fr19-mi/E010#11-linux-evolution-and-popular-operating-systems)
