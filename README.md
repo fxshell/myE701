@@ -66,7 +66,8 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 
 
 **Fazit und Aussicht** Ich habe schon einiges Über den Aufbau des Linux Kernels gelernt. Die Zeit war aber relativ knapp und ich werde Privat noch Zeit investieren müssen um mehr zu verstehen.
-
+</details>
+<details>
 <summary> Kapitel: 701.1 Modern Software Development </summary>
 
 # Kapitel: 701.1 Modern Software Development (Status: Abgeschlossen)
@@ -290,7 +291,7 @@ Der Reiz der APIs ist zweifach für die meisten Unternehmen, da APIs oft das Med
 
 **Fazit und Aussicht**, Die Durcharbeitung von 701.1 Modern Software Development gab mir ein besseres Verständnis darüber wie ein Microservices verschiedene Aufgaben handhabt und verwendet.
 
-***
+</details>
 
 ***
 ## Kapitel: 2 What is all this ?! (Status: In Arbeit)
