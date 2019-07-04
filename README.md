@@ -28,6 +28,176 @@ Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses
 
 # Dokumention des Lern- und Entwicklungsprozesses
 <details>
+<summary>Kubernetes Cluster installieren & konfigurieren</summary>
+<br>
+
+# Kubernetes Cluster
+
+**Weight**: 14 
+
+**Beschreibung**, Einrichten der Kubernetes Umgebung mit einem Master und zwei Worker Servern auf einem ESXi Host
+
+**Tagesziele**, Laufende Kubernetes Umgebung mit einem Master und zwei Worker Servern.
+
+**Vorgehen**, Informationen über Kubernetes und Kubernetes Cluster unter Linux bzw. Ubuntu suchen. Verschiedene Anleitungen studieren und schlussendlich das Kubernetes Cluster aufbauen.
+
+**Beispiele und Arbeitsergebnisse**
+
+## Step 1 - Kubeadm installation
+Betroffene VMs<br>
+
+    s801-k8sm-01 <- Master
+    s802-kwrk-01 <- Worker 1
+    s803-kwrk-02 <- Worker 2
+
+### VM Setup
+Zuerst müssen drei VMs erstellt und mit Ubuntu Server 18.04.02 LTS konfiguriert bzw. installiert werden.<br>
+Nachdem die VMs erstellt, geupdatet und mit den richtigen Hostnames & IP-Adressen konfiguriert wurde, muss noch das Hostsfile angepasst werden.<br>
+
+    sudo nano /etc/hosts
+
+Folgende konfiguration muss bei allen drei Servern ins Hostfile geschrieben werden.
+
+    10.10.5.100 s801-k8sm-01
+    10.10.5.110 s802-kwrk-01
+    10.10.5.111 s803-kwrk-02
+
+Schlussendlich muss bzw. kann man die Konfiguration auf allen drei Server mit folgenden Befehlen überprüfen.
+
+    ping -c 3 s801-k8sm-01
+    ping -c 3 s802-kwrk-01
+    ping -c 3 s803-kwrk-02
+
+Alle drei VMs sollten nun die Hostnamen zur IP-Adresse auflösen können. 
+
+### Docker installation
+
+Mit folgendem Befehl Docker auf den drei VMs installieren. Diese Docker Version ist die bereits compilierte vom Ubuntu Repository<br>
+
+    sudo apt install docker.io -y
+
+Danach muss man noch den Docker Service aktivieren und einstellen, dass er bei jedem Systemstart mit startet.<br>
+
+    sudo systemctl start docker
+    sudo systemctl enable docker
+
+### SWAP deaktivieren
+
+SWAP Partition finden und temporär deaktivieren.<br>
+
+    sudo swapon -s
+    sudo swapoff -a
+
+SWAP permanent deaktivieren.<br>
+
+    sudo nano /etc/fstab
+
+Sobald die Konfigurationdatei offen ist, die zuvor gefundenen SWAP Partition mit einem # auskommentieren, die Konfigurationdatei wieder abspeichern und die VM neustarten.
+
+    sudo init 6
+
+### Kubeadm packete installieren
+
+Dependencies installieren<br>
+
+    sudo apt install -y apt-transport-https
+
+Kubernetes Key hinzufügen<br>
+
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+Kubernetes Repository hinzufügen.<br>
+
+    cd /etc/apt/
+    sudo nano sources.list.d/kubernetes.list
+
+Kuberentes Repository in die zuvor erstellte Liste einfügen.<br>
+
+    deb http://apt.kubernetes.io/ kubernetes-xenial main
+
+Repositories Updaten und "kubeadm", "kubelet" und "kubectl" installieren.<br>
+
+    sudo apt update
+    sudo apt install -y kubeadm kubelet kubectl
+
+## Step 2 - Kubernetes Cluster initialisieren
+Betroffene VMs:<br>
+
+    s801-k8sm-01 <- Master
+### Cluster initialisieren
+
+    sudo kubeadm init --pod-network-cidr=10.13.37.0/24 --apiserver-advertise-address=10.10.5.100 --kubernetes-version "1.14.2"
+
+Den kubeadm join Command kopieren, dieser wird später benötigt um die Worker ins Cluster ein zu binden.<br>
+
+#### Note
+
+| Parameter          | Description      |
+| -------------- | -------------- |
+| --apiserver-advertise-address     | Determines which IP address Kubernetes should advertise its API server on. |
+| --pod-network-cidr        | Specify the range of IP addresses for the pod network. We're using the 'flannel' virtual network. If you want to use another pod network such as weave-net or calico, change the range IP address.         |
+
+### Create .kube Configuration
+
+    mkdir -p $HOME/.kube
+    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+### Deploy flannel network
+
+    kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+### Check kubernetes node & pads
+
+    kubectl get nodes
+    kubectl get pods --all-namespaces
+
+## Step 3 - Adding Worker Nodes to the Kubernetes Cluster
+Betroffene VMs<br>
+
+    s802-kwrk-01 <- Worker 1
+    s803-kwrk-02 <- Worker 2
+
+### Join Worker 1 & 2
+
+    kubeadm join 10.10.5.100:6443 --token p63z79.ihri5v5hdskjbhdj --discovery-token-ca-cert-hash sha256:11d78c9595bdbe95995517d96ce17b93adc1681e2086483a760a9d99f16f2edd
+
+### Test
+Betroffene VMs<br>
+
+    s801-k8sm-01 <- Master
+
+#### Testen ob die Worker erfolgreich gejoint wurden
+
+    kubectl get nodes
+
+# Kubernetes Dashboard UI
+**Installieren des Kubernetes Dashboard UIs um die Container via Web-Interface zu verwalten.**
+Betroffene VMs<br>
+
+    s801-k8sm-01 <- Master
+
+## Dashboard UI installation
+
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploay/recommended/kubernetes-dashboard.yaml
+
+## Activate Dashboard UI
+
+    kubectl proxy
+
+## Access Dashboard UI
+
+    http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+
+### Note
+
+The UI can only be accessed from the machine where the command is executed. See kubectl proxy --help for more options.
+
+**Fazit und Aussicht**, Die erstellung des Kubernetes Clusters gab mir ein besseres Verständnis darüber wie die Infrastruktur hinter einem Cluster funktioniert, wie die einzelnen Server bzw. Master und Worker kommunizieren und wie das ganze aufgesetzt/erstellt werden kann.
+
+</details>
+
+<details>
 <summary> Kapitel 1 - Linux Basics </summary>
 
 ## Linux Basics
@@ -341,6 +511,192 @@ More about [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-overvie
 + second one
 
 </details>
+<details>
+<summary>Kapitel: 701.2 Standard Components and Platforms for Software</summary>
+<br>
+
+# Kapitel: 701.2 Standard Components and Platforms for Software (Status: Abgeschlossen)
+
+**Weight**: 2 + 6 Bonuspunkte für die Kombination des Microservices, aus Topic 701.1, mit einer NoSQL Datenbank.
+
+**Beschreibung** Aufstellung von Features und Konzepten von:
+* Object storage
+* Relational and NoSQL databases
+* Message brokers and message queues
+* Big data services
+* Application runtimes / PaaS
+* Content delivery networks
+
+**Tagesziele**, Aufstellung der oben genannten Features und Konzepten.
+
+**Vorgehen**, Informationen über die oben gennanten Features und Konzepte sammeln und in einer Aufstellung beschreiben.
+
+**Beispiele und Arbeitsergebnisse**
+
+## Object storage
+Objektspeicher ist eine Computer-Datenspeicherarchitektur, die Daten als Objekte verwaltet. Im Gegensatz zu anderen Speicherarchitekturen wie Dateisystemen, die Daten als Dateihierarchie verwalten, und Blockspeicher, die Daten Blöcke innerhalb von Sektoren und Spuren verwaltet. Jedes Objekt enthält normalerweise die Daten selbst, eine variable Menge an Metadaten und einen global eindeutigen Bezeichner. Die Objektspeicherung kann auf mehreren Ebenen implementiert werden, einschließlich der Geräteebene (Objektspeichergerät), der Systemebene und der Schnittstellenebene. In jedem Fall versucht der Objektspeicher Funktionen zu ermöglichen die von anderen Speicherarchitekturen nicht adressiert werden wie z.B. Schnittstellen, die von der Anwendung direkt programmiert werden können, einen Namespace, der mehrere Instanzen physischer Hardware umfassen kann und Datenverwaltungsfunktionen wie Datenreplikation und Datenverteilung auf Objektebene Granularität.
+Objektspeichersysteme ermöglichen die Speicherung großer Mengen an unstrukturierten Daten. Die Objektspeicherung wird beispielsweise zum Speichern von Fotos auf Facebook, von Titeln auf Spotify oder von Dateien in Online-Collaboration-Diensten wie Dropbox verwendet.
+
+
+## Relational and NoSQL databases
+### Data models
+Mit einer NoSQL-Datenbank kann man eine Anwendung erstellen, ohne zuerst das Schema definieren zu müssen, im Gegensatz zu relationalen Datenbanken, mit denen man das Schema definieren muss, bevor man dem System Daten hinzufügen kann. Kein vordefiniertes Schema erleichtert die Aktualisierung von NoSQL-Datenbanken erheblich, da sich Ihre Daten und Anforderungen ändern.
+
+### Data structure
+Relationale Datenbanken wurden in einer Ära erstellt, in der Daten durch ihre Beziehungen fair strukturiert und klar definiert waren. NoSQL-Datenbanken sind so konzipiert, dass sie unstrukturierte Daten (z. B. Texte, Social Media-Posts, Videos, E-Mails) verarbeiten,die einen Großteil der heute vorhandenen Daten ausmachen.
+
+### Scaling
+Die Skalierung einer NoSQL-Datenbank ist viel billiger als die einer relationalen Datenbank, da man durch Skalierung über billige Commodity-Server Kapazität hinzufügen kann. Relationale Datenbanken erfordern andererseits einen einzelnen Server, um ihre gesamte Datenbank zu hosten. Um zu skalieren, muss man einen größeren, teureren Server kaufen.
+
+### Development model
+NoSQL-Datenbanken sind Open-Source-Datenbanken, während relationale Datenbanken in der Regel Closed-Source-Datenbanken sind und Lizenzgebühren für die Verwendung ihrer Software anfallen. Mit NoSQL kann man in ein Projekt einsteigen, ohne vorher viel in Software-Gebühren investieren zu müssen.
+
+
+## Message brokers and message queues
+### Message broker
+Ein Message broker ist ein Vermittler Computerprogrammmodul, dass eine Nachricht von dem formalen Nachrichtenprotokoll von dem Sender zu dem formalen Nachrichtenprotokoll des Empfängers übersetzt. Nachrichtenbroker sind Elemente in Telekommunikations- oder Computernetzwerken, in denen Softwareanwendungen durch den Austausch von formal definierten Nachrichten kommunizieren. Nachrichtenbroker sind ein Baustein für nachrichtenorientierte Middleware (MOM), ersetzen jedoch in der Regel keine herkömmliche Middleware wie MOM und Remote Procedure Call (RPC).
+
+### Message queues
+Anwendungen, die Message-Queuing-Verfahren einsetzen, weisen folgende Hauptmerkmale auf:
+
+* Es bestehen keine Direktverbindungen zwischen Programmen.
+* Die Kommunikation zwischen Programmen kann zeitunabhängig erfolgen.
+* Die Arbeit kann von kleinen eigenständigen Programmen ausgeführt werden.
+* Die Kommunikation kann ereignisgesteuert sein.
+* Anwendungen können Nachrichten Prioritäten zuweisen.
+* Sicherheit.
+* Datenintegrität.
+* Unterstützung bei der Wiederherstellung.
+
+Message-Queuing stellt ein Verfahren für die indirekte Kommunikation zwischen Programmen dar. Dieses Verfahren kann in jeder Anwendung eingesetzt werden, in der Programme miteinander kommunizieren. Die Kommunikation erfolgt, indem ein Programm Nachrichten in eine (einem Warteschlangenmanager zugehörige) Warteschlange einreiht und ein anderes Programm die Nachrichten aus der Warteschlange abruft.
+Programme können Nachrichten abrufen, die von anderen Programmen in eine Warteschlange eingereiht wurden. Die anderen Programme können mit demselben Warteschlangenmanager wie das empfangende Programm oder aber mit einem anderen Warteschlangenmanager verbunden sein. Dieser andere Warteschlangenmanager kann sich auf einem anderen System, in einem anderen Computersystem oder sogar in einem anderen Unternehmen befinden.
+
+
+## Big data services
+Um Big Data zu verstehen, ist es hilfreich, den geschichtlichen Hintergrund zu kennen. Das ist die Definition von Gartner, die etwa aus dem Jahr 2001 stammt und nach wie vor die gängigste ist: Unter Big Data versteht man Daten, die in großer Vielfalt, in großen Mengen und mit hoher Geschwindigkeit anfallen. Dies ist auch als die drei V-Begriffe bekannt (Variety, Volume, Velocity).
+Einfach gesagt: Mit Big Data bezeichnet man größere und komplexere Datensätze, vor allem von neuen Datenquellen. Diese Datensätze sind so umfangreich, dass klassische Datenverarbeitungssoftware sie nicht verwalten kann. Aber mit diesen massiven Datenvolumina können Sie geschäftliche Probleme angehen, die Sie bislang nicht lösen konnten.
+
+### Volume
+Die Menge an Daten ist wichtig. Bei Big Data müssen Sie große Mengen an unstrukturierten Daten mit geringer Dichte verarbeiten. Dabei kann es sich um Daten mit unbekanntem Wert handeln, z. B. Daten-Feeds von Twitter, Clickstreams von einer Webseite oder mobilen App oder Daten von Gerätesensoren. Für einige Unternehmen können das etliche Terabytes an Daten sein. Für andere Hunderte von Petabytes.
+
+### Velocity
+Die Geschwindigkeit ist die Schnelligkeitsrate, mit der Daten empfangen werden und mit der (vielleicht) auf sie reagiert wird. Im Normalfall fließt die höchste Geschwindigkeit von Daten direkt in den Speicher und wird nicht auf eine Festplatte geschrieben. Einige internetfähige, intelligente Produkte arbeiten in Echtzeit oder beinahe in Echtzeit. Für sie sind Auswertungen und Aktionen in Echtzeit erforderlich.
+
+### Variety
+Vielfalt bezieht sich auf die zahlreichen verfügbaren Datentypen. Traditionelle Datentypen waren strukturiert und ideal für relationale Datenbanken geeignet. Durch die Zunahme von Big Data gibt es nun neue, unstrukturierte Datentypen. Unstrukturierte und semistrukturierte Datentypen wie Text, Audio und Video erfordern zusätzliche Vorabverarbeitung, um die Bedeutung und die unterstützenden Metadaten zu gewinnen.
+
+
+## Application runtimes / PaaS
+### Application runtimes
+Eine Laufzeitumgebung beschreibt die zur Laufzeit von Computerprogrammen verfügbaren und festgelegten Voraussetzungen eines bestimmten Laufzeitsystems. Dieses ist durch die elementaren Bestandteile der Programmiersprache wie das Verhalten von Sprachkonstrukten und weitere Funktionen wie Typprüfung, Debugging, Codegenerierung und -optimierung definiert. Zur Laufzeitumgebung gehören weiterhin Laufzeitbibliothek, Standardbibliotheken, Programmierschnittstellen, Laufzeit-Variablen sowie auf Hard- und Softwarekomponenten über Betriebssystemfunktionen.
+
+### PaaS
+Als Platform as a Service (PaaS) bezeichnet man eine Dienstleistung, die in der Cloud eine Computer-Plattform für Entwickler von Webanwendungen zur Verfügung stellt. Dabei kann es sich sowohl um schnell einsetzbare Laufzeitumgebungen (typischerweise für Webanwendungen), aber auch um Entwicklungsumgebungen handeln, die mit geringem administrativem Aufwand und ohne Anschaffung der darunterliegenden Hardware und Software genutzt werden können. Sie unterstützen den gesamten Software-Lebenszyklus vom Design über die Entwicklung, den Test, die Auslieferung bis hin zum Betrieb der Webanwendungen über das Internet. Platform as a Service ist ein Teil von Everything as a Service.
+Einige Angebote umfassen auch Dienste zur kollaborativen Arbeit und Versionierung, zum Monitoring und für die Sicherheit oder Middleware-Dienste zum Speichern von Daten oder für die Kommunikation zwischen Anwendungen. PaaS-Angebote bauen auf einer skalierbaren Infrastruktur (IaaS) von Speicher und Rechenleistung auf und können somit ebenfalls skalieren. Aufbauend auf einer PaaS-Umgebung können Software as a Service (SaaS)-Angebote entstehen. Somit ist PaaS die mittlere Schicht im Cloud Stack.
+
+
+## Content delivery networks
+Ein Content Delivery Network (CDN), oder auch Content Distribution Network genannt, ist ein Netz regional verteilter und über das Internet verbundener Server, mit dem Inhalte – insbesondere große Mediendateien – ausgeliefert werden. Ein CDN stellt skalierende Speicher- und Auslieferungskapazitäten zur Verfügung und gewährleistet auch bei großen Lastspitzen einen optimalen Datendurchsatz.
+CDN-Knoten sind auf viele Orte verteilt und oft auch auf viele Backbones. Sie arbeiten zusammen, um Anfragen (Requests) von End-Nutzern nach Inhalten (Content) möglichst ökonomisch zu bedienen. Einzelne Standorte werden als PoP (Point of Presence) bezeichnet und bestehen aus Server-Clustern.
+Im Hintergrund (Transparent) werden die Daten im Netz so vorgehalten (Caching), dass die jeweilige Auslieferung entweder möglichst schnell geht (Performance-Optimierung) oder möglichst wenig Bandbreite verbraucht (Kosten-Optimierung), oder beides zugleich.
+Große CDNs unterhalten tausende Knoten mit zehntausenden Servern.
+
+### Funktionsweise
+Das CDN besteht zunächst aus einem Ursprungsserver, auf dem der Inhalteanbieter die zu verteilenden Inhalte ablegt, einer großen Zahl an Replica-Servern, die Kopien dieser Inhalte vorhalten, und einem Distributionssystem, das die Inhalte auf den Replica-Servern verteilt. Für die Umleitung der Benutzeranfragen auf die einzelnen Replica-Server ist ein Request-Routing-System zuständig, welches sich dabei auf verschiedene Kennzahlen über diese Server stützt, die ihm vom Accounting-System geliefert werden.
+Sendet ein Client eine Anfrage an das CDN, dann wählt das Request-Routing-System einen geeigneten Replica-Server. Bei der Auswahl bezieht es Kennzahlen über deren aktuelle Belastung (zum Beispiel CPU-Auslastung, Anzahl der aktiven Verbindungen) und über die Netzwerkverbindung zwischen Client und Server (zum Beispiel geographische Entfernung, Latenzzeit, Übertragungsrate), seltener über die Identität des Clients (zum Beispiel Unterscheidung zwischen Standard- und Premium-User) mit ein, die ihm durch das Accounting-System zur Verfügung gestellt werden.
+Nach Auswahl des Servers muss die Benutzeranfrage nun umgeleitet werden. Das am häufigsten eingesetzte Verfahren dafür ist DNS-basiertes Request Routing. Dabei werden Anfragen des Clients an einen vom CDN bereitgestellten DNS-Server weitergeleitet, welcher die IP-Adresse des Replica-Servers zurückgibt. Alternativ dazu kann auch ein HTTP-Statuscode 302 die Weiterleitung auf einen anderen Webserver veranlassen.
+
+**Fazit und Aussicht**, Die Durcharbeitung von 701.2 Standard Components and Platforms for Software gab mir ein besseres Verständnis darüber was für Features und Konzepte von einzelnen "Diensten" für Cloud Platformen verwendet werden.
+
+***
+</details>
+
+<details>
+<summary>Kapitel: 701.3 Source Code Management</summary>
+<br>
+
+# Kapitel: 701.3 Source Code Management (Status: Abgeschlossen)
+
+**Weight**: 5
+
+**Beschreibung** Aufstellung von Features und Eigenschaften von Git:
+* Git concepts and repository structure
+* Manage files within a Git repostitory
+* Manage branches and tags
+* Work with remote repositories and branches as well as submodules
+* Merge files and branches
+* Awareness of SVN and CVS, including concepts of centralized and distributed SCM solutions
+
+**Tagesziele**, Aufstellung der oben genannten Features und Eingenschaften von Git.
+
+**Vorgehen**, Informationen über die oben gennanten Features und Eigenschaften von Git sammeln und in einer Aufstellung beschreiben.
+
+**Beispiele und Arbeitsergebnisse**
+
+## How Git works ++
+Ein Git- Repository ist einfach eine Datenbank, die alle Informationen enthält, die zum Speichern und Verwalten der Revisionen und des Verlaufs eines Projekts erforderlich sind. In Git behält ein Repository wie bei den meisten Versionskontrollsystemen eine vollständige Kopie des gesamten Projekts während seiner gesamten Lebensdauer. Im Gegensatz zu den meisten anderen VCSs bietet das Git-Repository jedoch nicht nur eine vollständige Arbeitskopie aller Dateien im Repository, sondern auch eine Kopie des Repositorys selbst, mit dem gearbeitet werden soll.<br>
+
+Git verwaltet eine Reihe von Konfigurationswerten in jedem Repository wie z. B. den Namen und die E-Mail-Adresse des Repository-Benutzers. Im Gegensatz zu Dateidaten und anderen Repository-Metadaten werden Konfigurationseinstellungen während eines Klon- oder Dupliziervorgangs nicht von einem Repository auf ein anderes übertragen. Stattdessen verwaltet und überprüft Git die Konfigurations- und Einrichtungsinformationen auf Site-, Benutzer- und Repository-Basis.<br>
+
+In einem Repository verwaltet Git zwei primäre Datenstrukturen, den Objektspeicher und den Index . Alle diese Repository-Daten werden im Stammverzeichnis Ihres Arbeitsverzeichnisses in einem versteckten Unterverzeichnis mit dem Namen .git gespeichert. <br>
+
+Der Objektspeicher soll während einer Klonoperation als Teil des Mechanismus, der ein vollständig verteiltes VCS unterstützt, effizient kopiert werden. Beim Index handelt es sich um vorübergehende Informationen, die für ein Repository privat sind und bei Bedarf erstellt oder geändert werden können.
+
+### Blobs
+Jede Version einer Datei wird als Blob dargestellt . " Blob " ist eine Abkürzung für " binäres großes Objekt ", ein Begriff, der üblicherweise beim Rechnen verwendet wird, um sich auf eine Variable oder Datei zu beziehen, die beliebige Daten enthalten kann und deren interne Struktur vom Programm ignoriert wird. Ein Klecks wird als undurchsichtig behandelt. Ein Blob enthält die Daten einer Datei, jedoch keine Metadaten über die Datei oder sogar ihren Namen.
+
+### Trees
+Ein Baum - Objekt stellt eine Ebene der Verzeichnisinformationen. Es zeichnet Blob-IDs, Pfadnamen und einige Metadaten auffür alle Dateien in einem Verzeichnis. Es kann auch rekursiv auf andere (Unter-) Baumobjekte verweisen und so eine vollständige Hierarchie von Dateien und Unterverzeichnissen erstellen.
+
+### Commits
+Ein Commit enthält Metadaten für jede im Repository eingeführte Änderung, einschließlich Autor, Datum und Protokollnachricht. Jedes Commit verweist auf ein Baumobjekt, das in einem vollständigen Schnappschuss Folgendes erfasst: 
+
+    Der Status des Repositorys zum Zeitpunkt der Ausführung des Commits. 
+    Das ursprüngliche Commit oder Root-Commit hat kein übergeordnetes Element. 
+
+### Tags
+Ein Tag- Objekt weist einem bestimmten Objekt, normalerweise einem Commit, einen beliebigen, jedoch vermutlich von Menschen lesbaren Namen zu. Obwohl es 9da581d910c9c4ac93557ca4859e767f5caf5169 sich um ein genaues und genau definiertes Commit handelt, ist ein vertrauterer Tag-Name Ver-1.0-Alphamöglicherweise sinnvoller.
+
+### Index
+Der Index ist eine temporäre und dynamische Binärdatei, die die Verzeichnisstruktur des gesamten Repository beschreibt. Insbesondere erfasst der Index zu einem bestimmten Zeitpunkt eine Version der Gesamtstruktur des Projekts. Der Status des Projekts kann durch ein Festschreiben und einen Baum von einem beliebigen Punkt in der Projektgeschichte aus dargestellt werden, oder es kann sich um einen zukünftigen Status handeln, auf den Sie sich aktiv hinentwickeln.<br>
+
+Eines der wichtigsten Unterscheidungsmerkmale von Git ist, dass man den Inhalt des Index in methodischen, genau definierten Schritten ändern kann. Der Index ermöglicht eine Trennung zwischen inkrementellen Entwicklungsschritten und der Übernahme dieser Änderungen.
+
+### Content-Addressable Names
+Der Git-Objektspeicherist als inhaltsadressierbares Speichersystem organisiert und implementiert. Insbesondere hat jedes Objekt im Objektspeicher einen eindeutigen Namen, der durch Anwenden von SHA1 auf den Inhalt des Objekts erzeugt wird und einen SHA1-Hashwert ergibt. Da der vollständige Inhalt eines Objekts zum Hash-Wert beiträgt und davon ausgegangen wird, dass der Hash-Wert für diesen bestimmten Inhalt eindeutig ist, ist der SHA1-Hash ein ausreichender Index oder Name für dieses Objekt in der Objektdatenbank. Bei jeder geringfügigen Änderung an einer Datei ändert sich der SHA1-Hash, wodurch die neue Version der Datei separat indiziert wird.
+
+### Content-Tracking-System
+Es ist wichtig, Git nicht nur als Versionskontrollsystem zu betrachten denn Git ist auch ein Content-Tracking-System. Diese noch so subtile Unterscheidung leitet einen Großteil des Designs von Git und ist möglicherweise der Hauptgrund, warum Git interne Datenmanipulationen relativ einfach durchführen kann. Dies ist jedoch möglicherweise auch eines der am schwierigsten zu erfassenden Konzepte für neue Git-Benutzer. Daher lohnt sich eine Einführung.<br>
+
+Der Objektspeicher von Git basiert auf der Hash-Berechnung des Inhalts seiner Objekte, nicht auf den Datei- oder Verzeichnisnamen aus dem ursprünglichen Dateilayout des Benutzers. Wenn Git eine Datei in den Objektspeicher legt, basiert dies auf dem Hash der Daten und nicht auf dem Namen der Datei. Tatsächlich verfolgt Git keine Datei- oder Verzeichnisnamen, die Dateien auf sekundäre Weise zugeordnet sind. Auch hier verfolgt Git Inhalte anstelle von Dateien.<br>
+
+Wenn zwei separate Dateien in zwei verschiedenen Verzeichnissen genau denselben Inhalt haben, speichert Git eine einzige Kopie dieses Inhalts als Blob im Objektspeicher. Git berechnet den Hash-Code jeder Datei ausschließlich anhand ihres Inhalts, stellt fest, dass die Dateien dieselben SHA1-Werte und damit denselben Inhalt haben, und platziert das Blob-Objekt in dem durch diesen SHA1-Wert indizierten Objektspeicher. Beide Dateien im Projekt verwenden, unabhängig davon, wo sie sich in der Verzeichnisstruktur des Benutzers befinden, dasselbe Objekt für den Inhalt.<br>
+
+Wenn sich eine dieser Dateien ändert, berechnet Git einen neuen SHA1 und stellt fest, dass es sich nun um ein anderes Blob-Objekt handelt und fügt den neuen Blob dem Objektspeicher hinzu. Der ursprüngliche Blob verbleibt im Objektspeicher, damit die unveränderte Datei verwendet werden kann.<br>
+
+Dazu speichert die interne Datenbank von Git effizient jede Version jeder Datei - nicht deren Unterschiede - während die Dateien von einer Revision zur nächsten wechseln. Da Git den Hash des gesamten Inhalts einer Datei als Namen für diese Datei verwendet, muss jede vollständige Kopie der Datei bearbeitet werden. Es kann seine Arbeit oder seine Objektspeichereinträge nicht nur auf einen Teil des Dateiinhalts oder auf die Unterschiede zwischen zwei Revisionen dieser Datei stützen.<br>
+
+Die typische Benutzeransicht einer Datei, die Revisionen enthält und von einer Revision zur nächsten zu wechseln scheint, ist einfach ein Artefakt. Git berechnet diesen Verlauf als eine Reihe von Änderungen zwischen verschiedenen Blobs mit unterschiedlichen Hashes, anstatt einen Dateinamen und eine Reihe von Unterschieden direkt zu speichern. Es mag seltsam erscheinen, aber diese Funktion ermöglicht es Git, bestimmte Aufgaben mit Leichtigkeit auszuführen.
+
+### SVN vs. CVS
+
+| Nr.            | Vergelichselement | CVS            | SVN               |
+| -------------- | -------------- | ----------------- | ----------------- |
+| 1              | Repository-Format |CVS basiert auf RCS-Dateien der Versionskontrolle. Jede mit CVS verbundene Datei ist eine gewöhnliche Datei, die einige zusätzliche Informationen enthält. Es ist ganz natürlich, dass der Baum dieser Dateien den Dateibaum im lokalen Verzeichnis wiederholt. Daher sollten Sie mit CVS keine Angst vor Datenverlust haben und können RCS-Dateien bei Bedarf problemlos korrigieren.|Die Basis von SVN ist eine relationale Datenbank (BerkleyDB), entweder ein Satz von Binärdateien (FS_FS). Dies behebt einerseits viele Probleme (z.B. gleichzeitiger Zugriff über die Dateifreigabe) und ermöglicht neue Funktionen (z.B. Transaktionen bei der Betriebsleistung). Andererseits ist die Datenspeicherung jetzt nicht transparent oder steht zumindest nicht für Benutzereingriffe zur Verfügung. Aus diesem Grund werden die Hilfsprogramme zum "Bereinigen" und "Wiederherstellen" des Repositorys (der Datenbank) bereitgestellt.|
+| 2              | Geschwindigkeit |CVS arbeitet langsamer.|Insgesamt arbeitet SVN aufgrund einiger konstruktiver Lösungen wirklich schneller als CVS. Es überträgt weniger Informationen über das Netzwerk und unterstützt mehr Vorgänge im Offline-Modus. Es gibt jedoch die Umkehrung der Medaille. Die Geschwindigkeitssteigerung erfolgt im Wesentlichen auf Kosten der vollständigen Sicherung aller Arbeitsdateien auf Ihrem Computer.|
+| 3              | Tags & Branches |Diese werden normal und ordnungsgemäß umgesetzt.	|Die SVN-Entwickler behaupten mit Stolz, dass sie durch die Arbeit mit Tags und Zweigen drei Messungen eliminiert haben. In der Praxis bedeutet dies, dass beide Konzepte durch die Möglichkeit ersetzt wurden, Dateien oder Verzeichnisse im Repository zu kopieren, wobei der Änderungsverlauf gespeichert wurde. Das heißt, sowohl die Tag-Erstellung als auch die Zweig-Erstellung werden durch das Kopieren innerhalb des Repository ersetzt. Aus Sicht der SVN-Entwickler ist dies eine sehr elegante Entscheidung, die das Leben vereinfacht. Wir sind jedoch der Meinung, dass es nichts gibt, worauf wir stolz sein können. Bei Zweigen ist alles nicht so schlimm, jetzt sind Zweige nichts anderes als separate Ordner im Repository, die früher miteinander verbunden waren. Was Tags betrifft, ist alles viel schlimmer. Jetzt können Sie keinen Code mehr markieren, diese Funktion fehlt einfach. Bestimmt, Zum Teil wird dies durch die universelle Nummerierung der Dateien in SVN ausgeglichen, dh das gesamte Repository erhält die Versionsnummer, jedoch nicht jede einzelne Datei. Wir nehmen jedoch an, dass Sie nicht leugnen werden, dass es nicht sehr bequem ist, eine vierstellige Zahl anstelle eines symbolischen Tags zu speichern.|  
+| 4              | Metadaten       |CVS erlaubt nur das Speichern von Dateien und sonst nichts.	|SVN erlaubt es, eine beliebige Anzahl aller möglichen benannten Attribute an eine Datei anzuhängen.|  
+| 5              | Datentypen      |CVS war ursprünglich zur Speicherung von Textdaten gedacht. Aus diesem Grund ist die Speicherung anderer Dateien (binär, Unicode) nicht trivial und erfordert spezielle Informationen sowie Anpassungen auf Server- oder Clientseite.|SVN bearbeitet alle Dateitypen und benötigt keine Anweisungen.|  
+| 6              | Rollback        |CVS ermöglicht das Rollback von Commits im Repository, auch wenn dies einige Zeit in Anspruch nimmt (jede Datei sollte unabhängig verarbeitet werden).|SVN erlaubt kein Rollback des Commits. Die Autoren schlagen vor, einen guten Repository-Status an das Ende des Trunks zu kopieren, um einen fehlerhaften Commit zu überschreiben. Ein schlechtes Commit selbst verbleibt jedoch im Repository.|  
+| 7              | Transaktionen   |In CVS fehlt die Unterstützung von Transaktionen nach dem Prinzip "Alles oder Nichts" vollständig. Wenn Sie beispielsweise mehrere Dateien einchecken (auf den Server übertragen), wird der Vorgang möglicherweise nur für einige dieser Dateien abgeschlossen und für den Rest nicht (z. B. aufgrund von Konflikten). In der Regel ist es ausreichend, die Situation zu korrigieren und den Vorgang für die verbleibenden Dateien (nicht für alle Dateien) zu wiederholen. Das heißt, die Dateien werden in zwei Schritten eingecheckt. Es wurden keine Fälle von Lagerschäden aufgrund des Fehlens dieser Funktionalität beobachtet.|SVN unterstützt Transaktionen nach dem Prinzip "Alles oder Nichts".| 
+| 8              | Verfügbarkeit   | CVS wird überall dort unterstützt, wo man es benötigt.	|SVN ist noch nicht so weit verbreitet, so dass es Stellen gibt, an denen es noch nicht implementiert ist.|  
+| 9              | Interne Architektur und Code |CVS ist ein sehr altes System. Ursprünglich wurde CVS als eine Reihe von Skripten rund um die ausführbare RCS-Datei geschrieben. Später wurde dies in eine einzelne ausführbare Datei gepackt. Die interne Struktur des Codes ist jedoch schlecht und enthält viele historische Korrekturen. Bis jetzt gab es mehrere Versuche, CVS von Grund auf neu zu schreiben, aber wie bekannt, ohne Erfolg. Wir haben persönlich versucht, Client-Code zu extrahieren, um eine bessere Integration zwischen Plug-In und CVS zu erreichen, aber ohne Erfolg. Momentan glauben wir nicht, dass CVS in seiner Funktionalität zu stark zunimmt.	|Subversion-Autoren haben wirklich einige Zeit mit der internen SVN-Architektur verbracht. Ich weiß immer noch nicht, wie gut einige Entscheidungen sind, die sie treffen. Aber eines ist klar, der Code ist gut erweiterbar und zukünftige Verbesserungen stehen an.|   
+
+
+**Fazit und Aussicht**, Die Durcharbeitung von 701.3 Source Code Management gab mir ein besseres Verständnis darüber was für Features und Eigenschaften Git hat, wie Git diese verwendet und wie man sie selber anwenden kann.
+
+***
+</details>
 
 <details>
 <summary> Common Commands </summary>
@@ -614,7 +970,6 @@ Check Performance
 
 **Fazit und Aussicht**, z.B. Die Durcharbeitung von ... gab mir ein besseres Verständnis über die Funktionsweise von Containern.
 
-## 
 
 
 * [Exam 701: DevOps Tools Engineer](https://www.lpi.org/our-certifications/exam-701-objectives) 
