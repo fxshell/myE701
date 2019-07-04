@@ -237,8 +237,6 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 
 **Fazit und Aussicht** Ich habe schon einiges Über den Aufbau des Linux Kernels gelernt. Die Zeit war aber relativ knapp und ich werde Privat noch Zeit investieren müssen um mehr zu verstehen.
 </details>
-<details>
-<summary> Kapitel: 701.1 Modern Software Development </summary>
 	
 <details>
 <summary> Kapitel: 3 What is all this ?! </summary>
@@ -288,7 +286,8 @@ More about [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-overvie
 + second one
 
 </details>
-
+<details>
+<summary> Kapitel: 701.1 Modern Software Development </summary>
 # Kapitel: 701.1 Modern Software Development
 
 **Weight**: 6 + 4 Bonsupunkte für die Erstellung eines Microservices inkl Unit-Tests.
