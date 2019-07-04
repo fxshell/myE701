@@ -278,6 +278,20 @@ A Pod is the basic execution unit of a Kubernetes application–the smallest and
 A Pod encapsulates an application’s container (or, in some cases, multiple containers), storage resources, a unique network IP, and options that govern how the container(s) should run. A Pod represents a unit of deployment: a single instance of an application in Kubernetes, which might consist of either a single container or a small number of containers that are tightly coupled and that share resources.
 
 Docker is the most common container runtime used in a Kubernetes Pod, but Pods support other container runtimes as well.
+Kubernetes manages a cluster of Linux machines(might be cloud VM like AWS EC2 or physical servers), on each host machine, kubernetes runs any number of Pods, in each Pod there can be any number of containers. User’s application is running in one of those containers.
+
+For kubernetes, Pod is the minimum management unit, and all containers inside one Pod shares the same network namespace, which means they have same network interface and can connect each other by using localhost
+
+The official documentation says kubernetes networking model requires:
+
+all containers can communicate with all other containers without NAT
+all nodes can communicate with all containers (and vice-versa) without NAT
+the IP that a container sees itself as is the same IP that others see it as
+We can replace all containers to Pods in above requirements, as containers share with Pod network.
+
+Basically it means all Pods should be able to freely communicate with any other Pods in the cluster, even they are in different Hosts, and they recognized each other with their own IP address, just as the underlying Host does not exists. Also the Host should also be able to communicate with any Pod with it’s own IP address, without any address translation.
+
+Kubernetes does not provide any default network implementation, rather it only defines the model and leaves to other tools to implement it. There are many implementations nowadays, flannel is one of them and one of the simplest. 
 
 More about [Pods](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)
 
