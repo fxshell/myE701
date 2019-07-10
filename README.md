@@ -971,6 +971,7 @@ Check Performance
 </details>
 
 **Fazit und Aussicht**
+
 *** Fazit
 
 Sehr positiv an diesem Modul fand ich immer dediziert Zeit für Kubernetes reserviert zu haben. Auch wenn der Lerneffekt durch den Unterricht nicht so immens war, konnte ich durch regelmässiges eigenständiges recherchieren mich trotzdem immer mehr in die Materie einarbeiten und habe dadurch trotzdem einen guten Lerneffekt. Ein wenig unnütz fand ich es nur zum an dem Modul zu arbeiten in die TBZ zu kommen. Diese Arbeit hätte ich genausogut in der Arbeit machen können und mir den Stress mit der Anreise ersparen.
