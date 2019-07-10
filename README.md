@@ -970,13 +970,13 @@ Check Performance
 
 </details>
 
-**Fazit und Aussicht**
+### Fazit und Aussicht
 
-***Fazit
+#### Fazit
 
-Sehr positiv an diesem Modul fand ich immer dediziert Zeit für Kubernetes reserviert zu haben. Auch wenn der Lerneffekt durch den Unterricht nicht so immens war, konnte ich durch regelmässiges eigenständiges recherchieren mich trotzdem immer mehr in die Materie einarbeiten und habe dadurch trotzdem einen guten Lerneffekt. Ein wenig unnütz fand ich es nur zum an dem Modul zu arbeiten in die TBZ zu kommen. Diese Arbeit hätte ich genausogut in der Arbeit machen können und mir den Stress mit der Anreise ersparen.
+Sehr positiv an diesem Modul fand ich immer dediziert Zeit für Kubernetes reserviert zu haben. Auch wenn der Lerneffekt durch den Unterricht nicht so immens war, konnte ich durch regelmässiges eigenständiges recherchieren mich immer mehr in die Materie einarbeiten und hatte dadurch trotzdem einen guten Lerneffekt. Ein wenig unnütz fand ich es zu an dem Modul zu arbeiten in die TBZ zu kommen. Diese Arbeit hätte ich genausogut in der Arbeit machen können und mir den Stress mit der Anreise ersparen.
 
-***Aussicht
+#### Aussicht
 
 Ich werde in Zukunft das angeignete Wissen auch weiterhin anwenden können. Ich Hoste zurzeit eigene, nicht Containerisierte Infrastruktur. Das Ziel ist, die Anwendungen welche ich verwende, zukünftig produktiv mit einem kleinen Kubernetes Cluster zu verwalten und monitoren. Vorteile davon sind mehr flexibilität sowie HA durch den Cluster.
 
