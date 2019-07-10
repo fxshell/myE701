@@ -2,6 +2,11 @@
 
 Beispiel für einen Aufbau einer Dokumention des Lern- und Entwicklungsprozesses mit Ausgesuchten Unterkapiteln aus dem LPI E701 Exam
 ## Important Links
+
+* [Exam 701: DevOps Tools Engineer](https://www.lpi.org/our-certifications/exam-701-objectives) 
+* [E701 Dokumentation](https://github.com/w901-fr19-mi/E701)
+* [myE701 Original Repository](https://github.com/w901-fr19-mi/myE701) 
+
 * [Module Overview](https://github.com/w901-fr19-mi/W901)
 * [DevOps forked instructions](https://github.com/fxshell/E701---DevOps)
 * [W901 BSCW](https://bscw.tbz.ch/bscw/bscw.cgi/26211645)
@@ -239,13 +244,13 @@ The shortest path to a working, stable kernel is the monolithic approach. Either
 </details>
 	
 <details>
-<summary> Kapitel: 3 What is all this ?! </summary>
+<summary> Kapitel: 3 IAC & Container overview </summary>
 
-## Kapitel: 3 What is all this ?!
+## Kapitel: 3 IAC & Container overview
 
 **Weight**: Personal value
 
-**Beschreibung** Short explaination of ~~all~~ most services used in combination with Kubernetes.
+**Beschreibung** Short explaination of most services used in combination with Kubernetes.
 
 **Tagesziele**, Since I have to read and understand each of the services I can not estimate how long I am going to take for each service. I'll try to do all of them.
 
@@ -962,11 +967,16 @@ Check Performance
 | [[https://kubernetes.io/docs/reference/setup-tools/kubefed/kubefed/][kubefed]]               | the command line to control a Kubernetes Cluster Federation |
 | Kubernetes Components | [[https://kubernetes.io/docs/concepts/overview/components/][Link: Kubernetes Components]]                                 |
 
-**Fazit und Aussicht**, z.B. Die Durcharbeitung von ... gab mir ein besseres Verständnis über die Funktionsweise von Containern.
+
 </details>
 
+**Fazit und Aussicht**
+*** Fazit
 
-* [Exam 701: DevOps Tools Engineer](https://www.lpi.org/our-certifications/exam-701-objectives) 
-* [E701 Dokumentation](https://github.com/w901-fr19-mi/E701)
-* [myE701 Original Repository](https://github.com/w901-fr19-mi/myE701) 
+Sehr positiv an diesem Modul fand ich immer dediziert Zeit für Kubernetes reserviert zu haben. Auch wenn der Lerneffekt durch den Unterricht nicht so immens war, konnte ich durch regelmässiges eigenständiges recherchieren mich trotzdem immer mehr in die Materie einarbeiten und habe dadurch trotzdem einen guten Lerneffekt. Ein wenig unnütz fand ich es nur zum an dem Modul zu arbeiten in die TBZ zu kommen. Diese Arbeit hätte ich genausogut in der Arbeit machen können und mir den Stress mit der Anreise ersparen.
+
+***Aussicht
+Ich werde in Zukunft das angeignete Wissen auch weiterhin anwenden können. Ich Hoste zurzeit eigene, nicht Containerisierte Infrastruktur. Das Ziel ist, die Anwendungen welche ich verwende, zukünftig produktiv mit einem kleinen Kubernetes Cluster zu verwalten und monitoren. Vorteile davon sind mehr flexibilität sowie HA durch den Cluster.
+
+
 
